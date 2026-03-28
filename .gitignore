@@ -1,0 +1,30 @@
+# Répertoires Terraform locaux
+**/.terraform/
+**/.terraform.lock.hcl
+
+# State local (ne jamais committer — utiliser le backend distant)
+*.tfstate
+*.tfstate.backup
+*.tfstate.*.backup
+
+# Plans sauvegardés (peuvent contenir des données sensibles)
+*.tfplan
+tfplan
+
+# Fichiers de crash Terraform
+crash.log
+crash.*.log
+
+# Overrides (fichiers locaux qui ne font pas partie du projet)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Variables sensibles (ne jamais committer)
+*.auto.tfvars
+secrets.tfvars
+
+# Fichiers d'environnement locaux
+.env
+.env.local
