@@ -1,0 +1,5 @@
+# Copier ce fichier en terraform.tfvars et adapter les valeurs
+# cp terraform.tfvars.example terraform.tfvars
+
+location             = "eastus"
+storage_account_name = "stterraformstate001" # doit être globalement unique dans Azure
