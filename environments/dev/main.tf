@@ -82,13 +82,6 @@ resource "azurerm_storage_account" "this" {
 
   depends_on = [module.vnet]
 
-  network_rules {
-    default_action             = "Deny"
-    virtual_network_subnet_ids = [module.vnet.subnet_ids["snet-storage"]]
-    ip_rules                   = var.terraform_ip_allowlist
-    bypass                     = ["AzureServices"]
-  }
-
   tags = local.common_tags
 }
 
