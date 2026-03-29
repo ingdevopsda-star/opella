@@ -11,7 +11,7 @@ bootstrap/              → one-time remote state backend (run before any enviro
 modules/
   vnet/                 → reusable VNET module
 environments/
-  dev/                  → dev: eastus, Standard_B1s, LRS storage
+  dev/                  → dev: westeurope, Standard_D2s_v6, LRS storage
   prod/                 → prod: westeurope, Standard_B2s, GRS storage
 .github/workflows/
   terraform-ci.yml      → plan on every pull request
@@ -27,8 +27,8 @@ The module provisions a Virtual Network with configurable subnets, one NSG per s
 ```hcl
 module "vnet" {
   source              = "../../modules/vnet"
-  name                = "vnet-dev-eastus"
-  location            = "eastus"
+  name                = "vnet-dev-westeurope"
+  location            = "westeurope"
   resource_group_name = azurerm_resource_group.this.name
   address_space       = ["10.0.0.0/16"]
 
@@ -83,8 +83,8 @@ Both environments use the same module call. Only the values differ.
 
 | | dev | prod |
 |---|---|---|
-| Region | eastus | westeurope |
-| VM size | Standard_B1s | Standard_B2s |
+| Region | westeurope | westeurope |
+| VM size | Standard_D2s_v6 | Standard_B2s |
 | Storage replication | LRS | GRS |
 | OS disk | Standard_LRS | Premium_LRS |
 | Public IP | Yes | No |
@@ -95,11 +95,17 @@ Both environments use the same module call. Only the values differ.
 - **Resource Group** — RBAC boundary, tagging scope
 - **VNET** (via module) — subnets: `snet-vm`, `snet-storage`
 - **Linux VM** — Ubuntu 22.04 LTS, SSH key authentication only
-- **Storage Account + Blob container** — private, service endpoint from `snet-storage`, public blob access disabled
+- **Storage Account + Blob container** — private, public blob access disabled
 
 ---
 
 ## Design Decisions
+
+### Storage Account Network Rules
+
+The dev storage account has **no network-level firewall**. An earlier iteration used `default_action = "Deny"` with a VNet service endpoint allowlist, but this blocked the GitHub Actions runner from reading the storage container state during `terraform apply` — the runner IP is not in the VNet and Azure Storage network rules apply to all traffic regardless of authentication method.
+
+The container remains secured at the access-control level: `container_access_type = "private"` and `allow_nested_items_to_be_public = false` require authentication for every request. The network firewall is an additional defense-in-depth layer appropriate for production. In prod, a private endpoint (rather than a service endpoint + firewall) is the right pattern — it integrates with Azure Private DNS and allows a self-hosted runner inside the VNet to apply without firewall conflicts.
 
 ### Resource Groups vs Subscriptions
 
