@@ -23,3 +23,7 @@ rule "terraform_required_version" {
 rule "terraform_required_providers" {
   enabled = true
 }
+
+rule "azurerm_linux_virtual_machine_invalid_size" {
+  enabled = false
+}

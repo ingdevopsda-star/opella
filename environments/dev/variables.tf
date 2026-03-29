@@ -48,3 +48,9 @@ variable "unique_suffix" {
   description = "Suffixe alphanumérique pour garantir l'unicité globale du compte de stockage"
   type        = string
 }
+
+variable "terraform_ip_allowlist" {
+  description = "IPv4 addresses allowed through the storage account firewall — set via TF_VAR_terraform_ip_allowlist when running locally, never commit real IPs"
+  type        = list(string)
+  default     = []
+}

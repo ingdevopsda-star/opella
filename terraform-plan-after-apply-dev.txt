@@ -1,0 +1,35 @@
+Acquiring state lock. This may take a few moments...
+azurerm_resource_group.this: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope]
+module.vnet.azurerm_virtual_network.this: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope/providers/Microsoft.Network/virtualNetworks/vnet-dev-westeurope]
+module.vnet.azurerm_network_security_group.this["snet-vm"]: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope/providers/Microsoft.Network/networkSecurityGroups/nsg-snet-vm]
+azurerm_public_ip.vm: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope/providers/Microsoft.Network/publicIPAddresses/pip-vm-dev-westeurope]
+module.vnet.azurerm_network_security_group.this["snet-storage"]: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope/providers/Microsoft.Network/networkSecurityGroups/nsg-snet-storage]
+module.vnet.azurerm_subnet.this["snet-vm"]: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope/providers/Microsoft.Network/virtualNetworks/vnet-dev-westeurope/subnets/snet-vm]
+module.vnet.azurerm_subnet.this["snet-storage"]: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope/providers/Microsoft.Network/virtualNetworks/vnet-dev-westeurope/subnets/snet-storage]
+module.vnet.azurerm_network_security_rule.this["snet-vm__deny-all-inbound"]: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope/providers/Microsoft.Network/networkSecurityGroups/nsg-snet-vm/securityRules/deny-all-inbound]
+module.vnet.azurerm_network_security_rule.this["snet-vm__allow-ssh"]: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope/providers/Microsoft.Network/networkSecurityGroups/nsg-snet-vm/securityRules/allow-ssh]
+module.vnet.azurerm_subnet_network_security_group_association.this["snet-vm"]: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope/providers/Microsoft.Network/virtualNetworks/vnet-dev-westeurope/subnets/snet-vm]
+module.vnet.azurerm_subnet_network_security_group_association.this["snet-storage"]: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope/providers/Microsoft.Network/virtualNetworks/vnet-dev-westeurope/subnets/snet-storage]
+azurerm_network_interface.vm: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope/providers/Microsoft.Network/networkInterfaces/nic-vm-dev-westeurope]
+azurerm_storage_account.this: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope/providers/Microsoft.Storage/storageAccounts/stdevwesteuropeeu2026]
+azurerm_linux_virtual_machine.this: Refreshing state... [id=/subscriptions/<REDACTED_SUBSCRIPTION_ID>/resourceGroups/rg-dev-westeurope/providers/Microsoft.Compute/virtualMachines/vm-dev-westeurope]
+azurerm_storage_container.data: Refreshing state... [id=https://stdevwesteuropeeu2026.blob.core.windows.net/data]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
+Releasing state lock. This may take a few moments...
+
+
+az resource list --resource-group rg-dev-westeurope --output table
+Name                                                         ResourceGroup      Location    Type                                     Status
+-----------------------------------------------------------  -----------------  ----------  ---------------------------------------  ---------
+nsg-snet-storage                                             rg-dev-westeurope  westeurope  Microsoft.Network/networkSecurityGroups  Succeeded
+nsg-snet-vm                                                  rg-dev-westeurope  westeurope  Microsoft.Network/networkSecurityGroups  Succeeded
+pip-vm-dev-westeurope                                        rg-dev-westeurope  westeurope  Microsoft.Network/publicIPAddresses      Succeeded
+vnet-dev-westeurope                                          rg-dev-westeurope  westeurope  Microsoft.Network/virtualNetworks        Succeeded
+nic-vm-dev-westeurope                                        rg-dev-westeurope  westeurope  Microsoft.Network/networkInterfaces      Succeeded
+stdevwesteuropeeu2026                                        rg-dev-westeurope  westeurope  Microsoft.Storage/storageAccounts        Succeeded
+vm-dev-westeurope                                            rg-dev-westeurope  westeurope  Microsoft.Compute/virtualMachines        Succeeded
+vm-dev-westeurope_OsDisk_1_24bd48e46508485b9a822035e05f346f  RG-DEV-WESTEUROPE  westeurope  Microsoft.Compute/disks                  Succeeded
